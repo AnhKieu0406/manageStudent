@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -16,11 +18,17 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+
+    private Integer id;
 
     @Column(name ="first_name")
     private String firstName;
 
     @Column(name ="last_name")
     private String lastName;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_address")
+    private Adress adress ;
 }
