@@ -18,6 +18,8 @@ public class StudentController {
 
     @Autowired
     AddressService addressService;
+
+
     @GetMapping("/students")
     List<Student> getAll(){
         return studentService.getAll();
@@ -63,14 +65,21 @@ public class StudentController {
 
     @GetMapping("/findByCity")
     List<StudentDTO> findByCity(@RequestParam("city")String city){
-        List<StudentDTO> dtos = studentService.findByCity(city);
-        return dtos;
+//        List<StudentDTO> dtos = studentService.findByCity(city);
+        return studentService.findByCity(city);
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") Integer id){
-        studentService.deletebyId(id);
-        return "delete sucsess";
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable("id") Integer id){
+
+        return studentService.deletebyId(id);
     }
+
+    @PutMapping("/update")
+    public Student updateStudent(@RequestParam("id")Integer id,@RequestBody Student student){
+        return studentService.update(id,student);
+    }
+
+
 
 }

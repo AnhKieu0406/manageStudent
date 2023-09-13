@@ -8,9 +8,11 @@ import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class
@@ -78,13 +80,28 @@ StudentService {
         return  studentMapper.toDTO(students);
     }
 
-    public void deletebyId(Integer id) {
-//        if (id >= 1) {
-//            List<Student>  student = studentRepository.findAllById(id);
-//            if (student != null) {
-//                studentRepository.deleteById(id);
-//            }
-//        }
-        studentRepository.deleteById(id);
+    public boolean deletebyId(Integer id) {
+        if (id >= 1) {
+            List<Student>  student = studentRepository.findAllById(id);
+            if (student != null) {
+                studentRepository.deleteById(id);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public Student update(Integer id, Student student){
+        if (student!=null){
+            Student student1 = studentRepository.getById(id);
+            if (student1!=null){
+                student1.setFirstName(student.getFirstName());
+                student1.setLastName(student.getLastName());
+                student1.setAdress(student.getAdress());
+                return studentRepository.save(student1);
+            }
+        }
+        return null;
     }
 }

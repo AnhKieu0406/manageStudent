@@ -4,6 +4,7 @@ package com.vn.devmaster.services.managestudent.repository;
 import com.vn.devmaster.services.managestudent.domain.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +36,8 @@ public interface  StudentRepository extends JpaRepository<Student,Integer> {
             "where a.city like concat('%',:city,'%') ")
     List<Student> findAllByAdress_City(@Param("city") String city);
 
-     void deleteById(Integer id);
+
+
+
+//     Student updateAllById(Integer id);
 }
