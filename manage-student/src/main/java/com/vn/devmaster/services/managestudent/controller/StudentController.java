@@ -53,19 +53,17 @@ public class StudentController {
     }
     @GetMapping("/filter-name")
     List<StudentDTO> filterByName(@RequestParam("name") String name){
-        List<StudentDTO> dtos = studentService.filterByname(name);
+        List<StudentDTO> dtos = studentService.filterByName(name);
         return  dtos;
     }
 
     @GetMapping("/findid")
-    List<StudentDTO> findById(@RequestParam("id") Integer id){
-        List<StudentDTO> dtos = studentService.findById(id);
-        return dtos;
+    StudentDTO findById(@RequestParam("id") Integer id){
+        return studentService.findById(id);
     }
 
     @GetMapping("/findByCity")
     List<StudentDTO> findByCity(@RequestParam("city")String city){
-//        List<StudentDTO> dtos = studentService.findByCity(city);
         return studentService.findByCity(city);
     }
 
@@ -76,8 +74,9 @@ public class StudentController {
     }
 
     @PutMapping("/update")
-    public Student updateStudent(@RequestParam("id")Integer id,@RequestBody Student student){
-        return studentService.update(id,student);
+    public String updateStudent(@RequestParam("id")Integer id,@RequestBody Student student){
+        studentService.update(id,student);
+        return "Update Suscess";
     }
 
 

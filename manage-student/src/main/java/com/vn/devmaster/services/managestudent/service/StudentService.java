@@ -8,11 +8,9 @@ import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class
@@ -65,24 +63,23 @@ StudentService {
        studentRepository.saveAll(students);
     }
 
-    public List<StudentDTO> filterByname(String name) {
+    public List<StudentDTO> filterByName(String name) {
         List<Student> students = studentRepository.filterByName(name);
        return studentMapper.toDTO(students);
 
     }
-    public List<StudentDTO> findById(Integer id){
-        List<Student> student = studentRepository.findAllById(id);
+    public StudentDTO findById(Integer id){
+        Student student = studentRepository.findAllById(id);
         return studentMapper.toDTO(student);
     }
 
     public List<StudentDTO> findByCity(String city) {
-        List<Student> students= studentRepository.findAllByAdress_City(city);
-        return  studentMapper.toDTO(students);
+        return  studentMapper.toDTO(studentRepository.findAllByAdress_City(city));
     }
 
     public boolean deletebyId(Integer id) {
         if (id >= 1) {
-            List<Student>  student = studentRepository.findAllById(id);
+           Student  student = studentRepository.findAllById(id);
             if (student != null) {
                 studentRepository.deleteById(id);
                 return true;

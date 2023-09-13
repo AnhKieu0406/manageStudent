@@ -27,7 +27,7 @@ public interface  StudentRepository extends JpaRepository<Student,Integer> {
     List<Student> findAllByFirstName(String name);
 
     @Query(value = "select s  from Student s where s.id = ?1 ")
-   List<Student> findAllById(@Param("id") Integer id);
+   Student findAllById(@Param("id") Integer id);
 
 
 
