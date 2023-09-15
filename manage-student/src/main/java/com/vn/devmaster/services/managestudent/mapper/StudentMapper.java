@@ -46,6 +46,7 @@ public class StudentMapper  {
                 .name(entity.getFirstName() + ' ' + entity.getLastName())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
+
                 .adressDto(addressMapper.toDto(entity.getAdress()))
                 .subjectDtos(subjectMapper.toDto(entity.getSubjects()))
               // .studentSubjectDto(new StudentSubjectDto())
@@ -61,4 +62,7 @@ public class StudentMapper  {
         });
         return students;
     }
+
+
+
 }

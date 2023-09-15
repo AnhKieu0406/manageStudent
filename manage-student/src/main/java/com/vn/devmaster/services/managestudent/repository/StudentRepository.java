@@ -33,11 +33,11 @@ public interface  StudentRepository extends JpaRepository<Student,Integer> {
 
 
 
-    @Query(nativeQuery = true,  value = "select  s.id, first_name, last_name, id_address,a.city   " +
+    @Query(nativeQuery = true,  value = "select  s.id, a.city   " +
             "from Student  s "+
             "RIGHT join Adress a on s.id_address = a.id   " +
             "where a.city like concat('%',:city,'%') " )
-    List<Student> findStudentByAdress_City(@Param("city") String city);
+     List<Student> findStudentByAdress_City(@Param("city") String city);
 
 
 
