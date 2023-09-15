@@ -80,5 +80,19 @@ public class StudentController {
     }
 
 
+    @GetMapping("/findAllStudentBySubject")
+    List<StudentDTO> findBySubjectName(@RequestParam("name") String name){
+        return studentService.findBySubject(name);
+    }
+
+    @GetMapping("/findAllByPoint")
+    List<StudentDTO> findByPoint(){
+        return studentService.findByPoint();
+    }
+
+
+
+
+
 
 }

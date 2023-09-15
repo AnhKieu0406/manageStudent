@@ -1,11 +1,13 @@
 package com.vn.devmaster.services.managestudent.domain;
 
 import lombok.*;
-import org.hibernate.mapping.List;
+
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +15,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Getter
+@Setter
 @Table(name = "adress")
 public class Adress {
     @Id
@@ -29,7 +32,7 @@ public class Adress {
     @Column(name = "district", length = 50)
     private String district;
 
-//    @OneToMany(mappedBy = "adress")
-//     List <Student> students;
+    @OneToMany(targetEntity = Student.class,mappedBy = "adress",orphanRemoval = false, fetch = FetchType.LAZY)
+    Set<Student> list ;
 
 }

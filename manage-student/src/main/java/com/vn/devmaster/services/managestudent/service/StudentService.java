@@ -4,13 +4,17 @@ import com.vn.devmaster.services.managestudent.domain.Student;
 import com.vn.devmaster.services.managestudent.dto.StudentDTO;
 import com.vn.devmaster.services.managestudent.mapper.AddressMapper;
 import com.vn.devmaster.services.managestudent.mapper.StudentMapper;
+import com.vn.devmaster.services.managestudent.repository.AdressRepository;
 import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class
@@ -25,10 +29,16 @@ StudentService {
     private StudentRepository studentRepository;
 
     @Autowired
+    private AdressRepository adressRepository;
+
+    @Autowired
     private StudentMapper studentMapper;
 
     @Autowired
     private AddressMapper addressMapper;
+
+
+
 
 
     public List<Student> getAll(){
@@ -73,13 +83,16 @@ StudentService {
         return studentMapper.toDTO(student);
     }
 
+
     public List<StudentDTO> findByCity(String city) {
-        return  studentMapper.toDTO(studentRepository.findAllByAdress_City(city));
+       List<Student> list = studentRepository.findStudentByAdress_City(city);
+
+       return studentMapper.toDTO(list);
     }
 
     public boolean deletebyId(Integer id) {
         if (id >= 1) {
-           Student  student = studentRepository.findAllById(id);
+           Student  student = studentRepository.getById(id);
             if (student != null) {
                 studentRepository.deleteById(id);
                 return true;
@@ -92,13 +105,29 @@ StudentService {
     public Student update(Integer id, Student student){
         if (student!=null){
             Student student1 = studentRepository.getById(id);
-            if (student1!=null){
-                student1.setFirstName(student.getFirstName());
-                student1.setLastName(student.getLastName());
-                student1.setAdress(student.getAdress());
-                return studentRepository.save(student1);
-            }
+            student1.setFirstName(student.getFirstName());
+            student1.setLastName(student.getLastName());
+            student1.setAdress(student.getAdress());
+            return studentRepository.save(student1);
         }
         return null;
+    }
+
+
+    public List<StudentDTO> findBySubject(String name) {
+        return  studentMapper.toDTO(studentRepository.findAllBySubjects(name));
+    }
+
+
+
+    public List<StudentDTO> findByPoint() {
+
+
+        return studentMapper.toDTO(studentRepository.findAllByPoint());
+
+
+
+
+
     }
 }

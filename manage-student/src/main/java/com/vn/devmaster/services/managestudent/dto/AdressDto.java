@@ -15,21 +15,9 @@ import java.util.List;
 @Data
 @Builder
 public class AdressDto  {
-    Integer id;
-    String name;
-    String city;
-    String district;
+    private Integer id;
+    private String name;
+    private String city;
+    private String district;
 
-
-    /**
-     * DTO for {@link com.vn.devmaster.services.managestudent.domain.Student}
-     */
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class StudentDto implements Serializable {
-        private Integer id;
-        private String firstName;
-        private String lastName;
-    }
 }
