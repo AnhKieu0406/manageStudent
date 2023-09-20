@@ -73,8 +73,9 @@ public interface  StudentRepository extends JpaRepository<Student, Integer> {
     @Query(nativeQuery = true )
     List<StudentDto2> GetAllStudentSuject();
 
-    @Query(  value = "select s.id, CONCAT(s.first_name,' ',s.last_name)  name ,s.first_name firstName , a.city  city " +
+    @Query(  value = "select s.id, CONCAT(s.first_name,' ',s.last_name)  name ,s.first_name firstName , a.city  city, ss.point point " +
             "from Student  s" +
-            " inner join adress a on a.id = s.id_address ",nativeQuery = true)
+            " inner join adress a on a.id = s.id_address " +
+            "inner join student_subject ss on  ss.id_student =s.id ",nativeQuery = true)
     List<StudentProject> getStudentProjection();
 }

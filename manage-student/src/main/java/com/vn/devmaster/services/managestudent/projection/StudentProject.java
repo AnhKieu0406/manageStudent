@@ -13,6 +13,8 @@ public interface StudentProject {
 
     String getCity();
 
+    Integer getPoint();
+
     AdressDto getAddress();
 
     interface AdressDto{

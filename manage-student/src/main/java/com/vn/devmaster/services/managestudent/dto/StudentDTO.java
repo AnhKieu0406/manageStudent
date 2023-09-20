@@ -22,15 +22,18 @@ public class StudentDTO   {
     private String firstName;
     private String lastName;
     private String city;
+    private Integer point;
     private AdressDto adress;
+
     private List<SubjectDto> subjectDtos;
    private List<StudentSubjectDto> studentSubjectDto;
 
-    public StudentDTO(Integer id, String name,String firstName, String city) {
+    public StudentDTO(Integer id, String name,String firstName, String city, Integer point) {
         this.id= id;
         this.name =firstName +lastName;
         this.firstName = firstName;
         this.city = adress.getCity();
+        this.point = point;
 
 
     }
