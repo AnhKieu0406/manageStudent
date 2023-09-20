@@ -3,6 +3,9 @@ package com.vn.devmaster.services.managestudent.repository;
 
 import com.vn.devmaster.services.managestudent.domain.Student;
 import com.vn.devmaster.services.managestudent.dto.StudentDTO;
+
+import com.vn.devmaster.services.managestudent.dto.StudentDto1;
+import com.vn.devmaster.services.managestudent.dto.StudentDto2;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -13,7 +16,7 @@ import java.util.List;
 
 
 @Repository
-public interface  StudentRepository extends JpaRepository<Student,Integer> {
+public interface  StudentRepository extends JpaRepository<Student, Integer> {
 
     //viết query theo native
 //    @Query(nativeQuery = true, value = "SELECT * from student"+
@@ -23,21 +26,20 @@ public interface  StudentRepository extends JpaRepository<Student,Integer> {
 
     //HQL
     @Query(value = "select s from Student s where s.firstName like concat( '%',:name,'%') ")
-    List<Student> filterByName(@Param("name") String name);
+    List<StudentDTO> filterByName(@Param("name") String name);
 
 
 
     @Query(value = "select s  from Student s where s.id = ?1 ")
    Student findAllById(@Param("id") Integer id);
 
-
-
-
-    @Query(nativeQuery = true,  value = "select  s.id, a.city   " +
-            "from Student  s "+
-            "RIGHT join Adress a on s.id_address = a.id   " +
-            "where a.city like concat('%',:city,'%') " )
-     List<Student> findStudentByAdress_City(@Param("city") String city);
+    // Find Student By city
+    //s.id, s.firstName,s.lastName , s.adress.city
+//
+//    @Query(nativeQuery = true, value = "SELECT  s  " +
+//            "  from Student s  join  Adress  a on a.id = s.id_address " +
+//            "where a.city like concat( '%',:name,'%') ;")
+//    List<StudentDTO> findAllStudentByCity(@Param("city") String city);
 
 
 
@@ -48,12 +50,26 @@ public interface  StudentRepository extends JpaRepository<Student,Integer> {
             "where  sb.name like concat('%',:name,'%')")
     List<Student> findAllBySubjects(@Param("name")String name );
 
-    @Query(nativeQuery = true, value = "select  s.*  from student  s "
+    @Query(nativeQuery = true, value = "select distinct s.*  from student  s "
             + " join student_subject b on b.id_student=s.id   "
             +"where b.point > 8 ; " )
-      List<Student> findAllByPoint() ;
+      List<Student> findAllByPoint();
 
 
+    @Query(nativeQuery = true,  value = "select district s.* " +
+            "from Student  s "+
+            "RIGHT join Adress a on s.id_address = a.id " +
+            "INNER JOIN student_subject ss on s.id = ss.id_student " +
+            "where a.city like concat('%',:city,'%') "  )
+    List<Student> findStudentByAdress_City(@Param("city") String city);
 
-//     Student updateAllById(Integer id);
+
+//    @Query(value = "SELECT   s.id,s.first_name,s.last_name from  student s",nativeQuery = true)
+//    List<StudentProject> getStudent();
+
+    @Query(nativeQuery = true)
+    List<StudentDto1> GetAllStudent(@Param("city") String city);
+
+    @Query(nativeQuery = true )
+    List<StudentDto2> GetAllStudentSuject();
 }

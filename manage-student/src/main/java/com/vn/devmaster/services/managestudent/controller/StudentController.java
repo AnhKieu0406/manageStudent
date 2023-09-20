@@ -1,11 +1,16 @@
 package com.vn.devmaster.services.managestudent.controller;
 
-import com.vn.devmaster.services.managestudent.domain.Adress;
+
 import com.vn.devmaster.services.managestudent.domain.Student;
 import com.vn.devmaster.services.managestudent.dto.StudentDTO;
+
+import com.vn.devmaster.services.managestudent.dto.StudentDto1;
+import com.vn.devmaster.services.managestudent.dto.StudentDto2;
+import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import com.vn.devmaster.services.managestudent.service.AddressService;
 import com.vn.devmaster.services.managestudent.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,15 +25,15 @@ public class StudentController {
     AddressService addressService;
 
 
+    @Autowired
+    StudentRepository studentRepository;
+
     @GetMapping("/students")
     List<Student> getAll(){
         return studentService.getAll();
     }
 
-//    @GetMapping("/address")
-//    List<Adress> getAll1(){
-//        return addressService.getAll();
-//    }
+
 
     @GetMapping("/studentss")
      List<StudentDTO> getStudentDTOS(){
@@ -62,10 +67,10 @@ public class StudentController {
         return studentService.findById(id);
     }
 
-    @GetMapping("/findByCity")
-    List<StudentDTO> findByCity(@RequestParam("city")String city){
-        return studentService.findByCity(city);
-    }
+//    @GetMapping("/findByCity")
+//    List<StudentDTO> findByCity(@RequestParam("city")String city){
+//        return studentService.findByCity(city);
+//    }
 
     @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable("id") Integer id){
@@ -90,6 +95,26 @@ public class StudentController {
         return studentService.findByPoint();
     }
 
+
+
+    @GetMapping("/findByCity")
+        public List<StudentDTO> findByCity(@RequestParam("city")String city){
+        return studentService.findByCity(city);
+    }
+
+
+
+
+
+    @GetMapping("/getStudentDTO1")
+    public ResponseEntity<List<StudentDto1>> GetAllStudent(String city){
+        return ResponseEntity.ok(studentRepository.GetAllStudent(city));
+    }
+
+    @GetMapping("/getStudentDTO2")
+    public ResponseEntity<List<StudentDto2>> GetAllStudent1(){
+        return ResponseEntity.ok(studentRepository.GetAllStudentSuject());
+    }
 
 
 

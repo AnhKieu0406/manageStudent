@@ -17,8 +17,8 @@ public class AddressService {
     @Autowired
     private AddressMapper addressMapper;
 
-    public List<Adress> getAll(){
-        List<Adress> list = adressRepository.findAll();
-        return list;
-    }
+
+
+
+
 }

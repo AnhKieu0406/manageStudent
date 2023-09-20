@@ -14,8 +14,7 @@ import java.util.Set;
 @Data
 @Builder
 @Entity
-@Getter
-@Setter
+
 @Table(name = "adress")
 public class Adress {
     @Id

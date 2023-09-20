@@ -1,6 +1,6 @@
 package com.vn.devmaster.services.managestudent.dto;
 
-import com.vn.devmaster.services.managestudent.domain.Adress;
+
 import lombok.*;
 
 import java.io.Serializable;

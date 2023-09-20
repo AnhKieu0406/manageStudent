@@ -4,26 +4,19 @@ import com.vn.devmaster.services.managestudent.domain.Student;
 import com.vn.devmaster.services.managestudent.dto.StudentDTO;
 import com.vn.devmaster.services.managestudent.mapper.AddressMapper;
 import com.vn.devmaster.services.managestudent.mapper.StudentMapper;
+import com.vn.devmaster.services.managestudent.projection.StudentProject;
 import com.vn.devmaster.services.managestudent.repository.AdressRepository;
 import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Service
 public class
 StudentService {
-//        List<Student> findAll();
-//
-//        List<StudentDTO> findAllDTO();
-//
-//        StudentDTO findById(Integer id);
 
     @Autowired
     private StudentRepository studentRepository;
@@ -36,9 +29,6 @@ StudentService {
 
     @Autowired
     private AddressMapper addressMapper;
-
-
-
 
 
     public List<Student> getAll(){
@@ -72,10 +62,10 @@ StudentService {
         List<Student> students = studentMapper.toEntity(studentDTOS);
        studentRepository.saveAll(students);
     }
-
+//
     public List<StudentDTO> filterByName(String name) {
-        List<Student> students = studentRepository.filterByName(name);
-       return studentMapper.toDTO(students);
+        List<StudentDTO> students = studentRepository.filterByName(name);
+       return students;
 
     }
     public StudentDTO findById(Integer id){
@@ -84,11 +74,6 @@ StudentService {
     }
 
 
-    public List<StudentDTO> findByCity(String city) {
-       List<Student> list = studentRepository.findStudentByAdress_City(city);
-
-       return studentMapper.toDTO(list);
-    }
 
     public boolean deletebyId(Integer id) {
         if (id >= 1) {
@@ -118,16 +103,23 @@ StudentService {
         return  studentMapper.toDTO(studentRepository.findAllBySubjects(name));
     }
 
-
-
     public List<StudentDTO> findByPoint() {
-
-
         return studentMapper.toDTO(studentRepository.findAllByPoint());
-
-
-
-
-
     }
+
+
+    public List<StudentDTO> findByCity(String city) {
+        List<Student> list = studentRepository.findStudentByAdress_City(city);
+        return studentMapper.toDTO(list);
+    }
+//    public List<StudentDTO> findStudentAttributr() {
+//        List<StudentProject> students = studentRepository.getStudent();
+//        List<StudentDTO> studentDTOS = new ArrayList<>();
+//        for (StudentProject project : students){
+//            studentDTOS.add(new StudentDTO(project.getId(),
+//                    project.getFirstName(),
+//                    project.getLastName()));
+//        }
+//        return studentDTOS;
+//    }
 }

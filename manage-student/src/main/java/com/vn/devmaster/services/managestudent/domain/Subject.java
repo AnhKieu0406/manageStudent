@@ -20,7 +20,8 @@ public class Subject {
     @Column(name = "name", length = 250)
     private String name;
 
-//    @ManyToMany(mappedBy = "subject")
+//    @ManyToMany(mappedBy = "subjects")
 //    List<Student> students = new ArrayList<>();
-
+    @OneToMany(mappedBy = "subject",cascade = CascadeType.ALL)
+    private List<StudentSubject>  studentSubjects;
 }
