@@ -20,4 +20,6 @@ public class AdressDto  {
     private String city;
     private String district;
 
+
+
 }

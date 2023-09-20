@@ -6,6 +6,7 @@ import com.vn.devmaster.services.managestudent.dto.StudentDTO;
 
 import com.vn.devmaster.services.managestudent.dto.StudentDto1;
 import com.vn.devmaster.services.managestudent.dto.StudentDto2;
+import com.vn.devmaster.services.managestudent.projection.StudentProject;
 import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import com.vn.devmaster.services.managestudent.service.AddressService;
 import com.vn.devmaster.services.managestudent.service.StudentService;
@@ -67,10 +68,6 @@ public class StudentController {
         return studentService.findById(id);
     }
 
-//    @GetMapping("/findByCity")
-//    List<StudentDTO> findByCity(@RequestParam("city")String city){
-//        return studentService.findByCity(city);
-//    }
 
     @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable("id") Integer id){
@@ -84,7 +81,6 @@ public class StudentController {
         return "Update Suscess";
     }
 
-
     @GetMapping("/findAllStudentBySubject")
     List<StudentDTO> findBySubjectName(@RequestParam("name") String name){
         return studentService.findBySubject(name);
@@ -95,16 +91,10 @@ public class StudentController {
         return studentService.findByPoint();
     }
 
-
-
     @GetMapping("/findByCity")
         public List<StudentDTO> findByCity(@RequestParam("city")String city){
         return studentService.findByCity(city);
     }
-
-
-
-
 
     @GetMapping("/getStudentDTO1")
     public ResponseEntity<List<StudentDto1>> GetAllStudent(String city){
@@ -117,6 +107,10 @@ public class StudentController {
     }
 
 
+    @GetMapping("/findByCityProjection")
+    public List<StudentProject> findByCityProjection(){
+        return studentService.findStudentAttributr();
+    }
 
 
 

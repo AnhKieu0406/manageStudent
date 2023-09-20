@@ -47,10 +47,10 @@ public class StudentMapper  {
     public StudentDTO toDTO(Student entity) {
         StudentDTO student = StudentDTO.builder()
                 .id(entity.getId())
-                .fullName(entity.getFirstName() + ' ' + entity.getLastName())
+                .name(entity.getFirstName() + ' ' + entity.getLastName())
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
-                .adressDto(addressMapper.toDto(entity.getAdress()))
+                .adress(addressMapper.toDto(entity.getAdress()))
                .subjectDtos(subjectMapper.toDto(entity.getSubjects()))
                 .studentSubjectDto(studentSubjectMapper.toDto(entity.getStudentSubjects()))
                 .build();

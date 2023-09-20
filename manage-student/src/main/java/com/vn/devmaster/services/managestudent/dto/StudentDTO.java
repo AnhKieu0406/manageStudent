@@ -14,26 +14,32 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Builder
-
+@ToString
 public class StudentDTO   {
 
     private Integer id;
-    private String fullName;
+    private String name;
     private String firstName;
     private String lastName;
-    private AdressDto adressDto;
+    private String city;
+    private AdressDto adress;
     private List<SubjectDto> subjectDtos;
    private List<StudentSubjectDto> studentSubjectDto;
 
-    public StudentDTO(Integer id, String firstName, String lastName) {
+    public StudentDTO(Integer id, String name,String firstName, String city) {
         this.id= id;
-        this.firstName =firstName;
-        this.lastName  = lastName;
+        this.name =firstName +lastName;
+        this.firstName = firstName;
+        this.city = adress.getCity();
+
+
     }
+
+
 
     public String getAdressDto() {
 
-        return ("City : "+ adressDto.getCity());
+        return ("City : "+ adress.getCity());
     }
 
 

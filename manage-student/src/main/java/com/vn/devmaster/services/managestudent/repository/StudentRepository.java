@@ -6,6 +6,7 @@ import com.vn.devmaster.services.managestudent.dto.StudentDTO;
 
 import com.vn.devmaster.services.managestudent.dto.StudentDto1;
 import com.vn.devmaster.services.managestudent.dto.StudentDto2;
+import com.vn.devmaster.services.managestudent.projection.StudentProject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -56,10 +57,9 @@ public interface  StudentRepository extends JpaRepository<Student, Integer> {
       List<Student> findAllByPoint();
 
 
-    @Query(nativeQuery = true,  value = "select district s.* " +
-            "from Student  s "+
-            "RIGHT join Adress a on s.id_address = a.id " +
-            "INNER JOIN student_subject ss on s.id = ss.id_student " +
+    @Query(nativeQuery = true,  value = "select  s.* " +
+            "from student  s "+
+            "RIGHT join adress a on s.id_address = a.id " +
             "where a.city like concat('%',:city,'%') "  )
     List<Student> findStudentByAdress_City(@Param("city") String city);
 
@@ -72,4 +72,9 @@ public interface  StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query(nativeQuery = true )
     List<StudentDto2> GetAllStudentSuject();
+
+    @Query(  value = "select s.id, CONCAT(s.first_name,' ',s.last_name)  name ,s.first_name firstName , a.city  city " +
+            "from Student  s" +
+            " inner join adress a on a.id = s.id_address ",nativeQuery = true)
+    List<StudentProject> getStudentProjection();
 }

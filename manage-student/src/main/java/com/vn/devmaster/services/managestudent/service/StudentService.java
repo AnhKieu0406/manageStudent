@@ -112,14 +112,7 @@ StudentService {
         List<Student> list = studentRepository.findStudentByAdress_City(city);
         return studentMapper.toDTO(list);
     }
-//    public List<StudentDTO> findStudentAttributr() {
-//        List<StudentProject> students = studentRepository.getStudent();
-//        List<StudentDTO> studentDTOS = new ArrayList<>();
-//        for (StudentProject project : students){
-//            studentDTOS.add(new StudentDTO(project.getId(),
-//                    project.getFirstName(),
-//                    project.getLastName()));
-//        }
-//        return studentDTOS;
-//    }
+    public List<StudentProject> findStudentAttributr() {
+       return studentRepository.getStudentProjection();
+    }
 }
