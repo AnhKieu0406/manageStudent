@@ -6,7 +6,7 @@ import com.vn.devmaster.services.managestudent.dto.StudentDTO;
 
 import com.vn.devmaster.services.managestudent.dto.StudentDto1;
 import com.vn.devmaster.services.managestudent.dto.StudentDto2;
-import com.vn.devmaster.services.managestudent.projection.StudentProject;
+import com.vn.devmaster.services.managestudent.projection.*;
 import com.vn.devmaster.services.managestudent.repository.StudentRepository;
 import com.vn.devmaster.services.managestudent.service.AddressService;
 import com.vn.devmaster.services.managestudent.service.StudentService;
@@ -112,6 +112,30 @@ public class StudentController {
         return studentService.findStudentAttributr();
     }
 
+    @GetMapping("/findByAVg")
+    public List<StudentAvg> findByAVg(){
+        return studentRepository.getStudentAvg();
+    }
+
+    @GetMapping("/findSubjectByAVg")
+    public List<SubjectAvg> findSubjectByAvg(){
+        return studentRepository.getSubjectAvg();
+    }
+
+    @GetMapping("/findStudentMaxPoint")
+    public List<StudentMaxPoint> findStudentMaxPoint(){
+        return studentRepository.getStudentMaxPoint();
+    }
+
+    @GetMapping("/findStudentHocBong")
+    public List<StudentHocBong> findStudentHocBong(){
+        return studentRepository.getStudentHocBong();
+    }
+
+    @GetMapping("/findStudentMinPoint")
+    public List<StudentMinPoint> findStudentMinPoint(){
+        return studentRepository.getStudentMinPoint();
+    }
 
 
 }

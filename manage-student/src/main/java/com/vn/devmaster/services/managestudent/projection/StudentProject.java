@@ -15,18 +15,7 @@ public interface StudentProject {
 
     Integer getPoint();
 
-    AdressDto getAddress();
-
-    interface AdressDto{
-        String getCity();
-    }
-
-
-
-
-
-
-
+    Double getAvg();
 
 
 }

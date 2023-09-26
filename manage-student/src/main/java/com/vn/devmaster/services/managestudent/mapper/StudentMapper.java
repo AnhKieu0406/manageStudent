@@ -52,7 +52,7 @@ public class StudentMapper  {
                 .lastName(entity.getLastName())
                 .adress(addressMapper.toDto(entity.getAdress()))
                .subjectDtos(subjectMapper.toDto(entity.getSubjects()))
-                .studentSubjectDto(studentSubjectMapper.toDto(entity.getStudentSubjects()))
+         //       .studentSubjectDto(studentSubjectMapper.toDto(entity.getStudentSubjects()))
                 .build();
 
 

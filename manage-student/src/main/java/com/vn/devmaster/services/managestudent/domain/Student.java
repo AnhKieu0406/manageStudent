@@ -103,9 +103,7 @@ public class Student {
 
 
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_student")
-    private List<StudentSubject>  studentSubjects ;
+  
 
 
     @ManyToOne(fetch = FetchType.LAZY)
